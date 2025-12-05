@@ -69,27 +69,39 @@ body, html {
     margin-bottom: 0;
 }
 
-#contact-table {
-    display: table;
-    margin: 0 auto;
+.contact-item {
+    position: relative;
+    cursor: pointer;
+    margin: 5px 0;
+    height: 1.2em; /* Fixed height to prevent layout shift if possible, or let it flow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.contact-line {
-    display: table-row;
-}
-
-.contact-label, .contact-value, .contact-line > span:nth-child(2) {
-    display: table-cell;
-    padding: 4px;
-}
-
-.contact-label {
-    text-align: right;
+.contact-label, .contact-value {
+    transition: opacity 0.3s ease;
 }
 
 .contact-value {
-    text-align: left;
-    user-select: text;
+    display: none; /* Hidden by default */
+}
+
+.contact-item:hover .contact-label {
+    display: none;
+}
+
+.contact-item:hover .contact-value {
+    display: inline-block;
+}
+
+@media (hover: none) {
+    .contact-label {
+        display: none;
+    }
+    .contact-value {
+        display: inline-block;
+    }
 }
 
 .main_text {
