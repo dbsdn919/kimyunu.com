@@ -31,6 +31,7 @@ body, html {
     color: var(--text-color);
     background-color: var(--background-color);
     user-select: none;
+    word-spacing: -0.3em; /* Slightly adjusted word spacing */
 }
 
 #container {
@@ -44,7 +45,7 @@ body, html {
 
 #indicator {
     display: inline-block;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Apple's spring animation style */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Quick, snappy rotation */
 }
 
 #indicator.rotated {
@@ -59,7 +60,10 @@ body, html {
     opacity: 1;
     max-height: 100px; /* Adjust as needed */
     overflow: hidden;
-    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); /* Apple's spring animation style */
+    /* Opening: Height expands first, content fades in slightly later */
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                margin-bottom 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 1s ease-out 0.1s; /* Slight delay for opacity */
     margin-bottom: 5px;
 }
 
@@ -67,6 +71,8 @@ body, html {
     opacity: 0;
     max-height: 0;
     margin-bottom: 0;
+    /* Closing: Animate everything smoothly together (Reverted) */
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-item {
@@ -80,7 +86,7 @@ body, html {
 }
 
 .contact-label, .contact-value {
-    transition: opacity 0.3s ease;
+    transition: opacity 0.8s ease;
 }
 
 .contact-value {
@@ -113,6 +119,11 @@ body, html {
 
 #current-time {
  color: var(--current-time-color, gray); /* Default to gray if not overridden */
+}
+
+/* Center dots and tighten their space symmetrically without breaking text flow */
+.dot {
+    margin: 0 -0.1em;
 }
 
 .main-text-container {
@@ -193,13 +204,24 @@ body.info-active::after {
 }
 
 
-@media (prefers-color-scheme: dark) {
-    :root {
-    --text-color: #fff;
-    --background-color: #121212;
-    --current-time-color: #aaa;
+@media (max-width: 768px) {
+    .contact-item {
+        margin: 7px 0;
     }
-    #container::before {
-    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.13) 0%, transparent 65%);
+
+    /* Mobile Specific: Faster text transition */
+    .contact-label, .contact-value {
+        transition: opacity 0.4s ease;
+    }
+
+    #contact-details {
+        max-height: 90px; /* Exact match for content height (~86px) */
+        /* Mobile Specific: Softer easing to prevent abrupt stop */
+        transition: max-height 1s cubic-bezier(0.1, 1, 0.2, 1),
+                    margin-bottom 1s cubic-bezier(0.1, 1, 0.2, 1),
+                    opacity 1s ease-out 0.1s;
     }
 }
+
+
+
