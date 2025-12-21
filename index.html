@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta http-equiv="refresh" content="0; url=main.html">
-    <title>Redirecting...</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
-    <p style="text-align: center;">Processing... <a href="main.html"></a></p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>김윤우 KIM YUNU</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main_text">
+        <h1>KIM&nbsp;YUNU</h1>
+        <div class="contact">
+          <div>
+            <a href="#" id="phone-link">+82&#41; 10-2439-3919</a>
+            <a href="mailto:info@kimyunu.com"
+              >info@kimyunu<span class="tight-dot">.</span>com</a
+            >
+            <a href="https://instagram.com/kim.yunu" target="_blank"
+              >@kim<span class="tight-dot">.</span>yunu</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="main_image"></div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal">
+      <div class="modal-content">
+        <div class="modal-buttons">
+          <a href="tel:+821024393919" class="modal-btn">CALL</a>
+          <a href="sms:+821024393919" class="modal-btn">MESSAGE</a>
+        </div>
+        <button id="close-modal" class="modal-btn close-btn">CLOSE</button>
+      </div>
+    </div>
+  </body>
 </html>
