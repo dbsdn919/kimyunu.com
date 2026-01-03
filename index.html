@@ -6,11 +6,31 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta http-equiv="refresh" content="0; url=main.html">
-    <title>Redirecting...</title>
-    <link rel="stylesheet" href="main.css">
+    <!-- Removed meta-refresh to allow animation to be visible -->
+    <title>KIM YUNU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
-    <p style="text-align: center;">Processing... <a href="main.html"></a></p>
+<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; font-family: 'IBM Plex Mono', monospace;">
+    <p style="text-align: center;">Processing<span id="dots" style="letter-spacing: -0.2em;">.</span></p>
+
+    <script>
+        const dotsElement = document.getElementById('dots');
+        let dotCount = 0;
+        dotsElement.textContent = ''; // Start with empty
+        
+        // Dot animation every 500ms (0.5s)
+        const dotInterval = setInterval(() => {
+            dotCount = (dotCount + 1) % 4; // Cycles 0, 1, 2, 3
+            dotsElement.textContent = '.'.repeat(dotCount);
+        }, 500);
+
+        // Redirect after a longer delay to show the full sequence (2.5s)
+        setTimeout(() => {
+            window.location.href = 'main.html';
+        }, 2500);
+    </script>
 </body>
 </html>
