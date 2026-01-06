@@ -6,32 +6,87 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- Removed meta-refresh to allow animation to be visible -->
-    <title>KIM YUNU</title>
+    <title>김윤우 KIM YUNU</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="prefetch" href="main.html">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css?v=1">
+    
 </head>
-<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; font-family: 'IBM Plex Mono', monospace;">
-    <p style="text-align: center;">Processing<span id="dots" style="letter-spacing: -0.2em;">.</span></p>
+<body oncontextmenu="return false;">
+    <div id="loading-screen" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; font-family: 'IBM Plex Mono', monospace;">
+        <p style="text-align: center;">Processing<span id="dots" style="letter-spacing: -0.2em;">.</span></p>
+    </div>
+
+    <div id="container" style="display: none;">
+        <div class="main-text-container">
+            <h1 class="main_text" style="margin: 5px 0 5px 0;">KIM&nbsp;YUNU</h1>
+            <p id="info-toggle" class="main_text" style="margin: 5px 0 5px 0;">INFO&nbsp;<span id="indicator"> &gt;</span></p>
+        </div>
+        <div id="contact-details" class="hidden">
+            <p class="main_text contact-item">
+                <span class="contact-label">MAIL</span>
+                <span class="contact-value"><a href="mailto:info@kimyunu.com">INFO@KIMYUNU<span class="dot">.</span>COM</a></span>
+            </p>
+            <p class="main_text contact-item">
+                <span class="contact-label">PHONE</span>
+                <span class="contact-value"><a href="tel:010-2439-3919">+82&#41; 10-2439-3919</a></span>
+            </p>
+            <p class="main_text contact-item">
+                <span class="contact-label">INSTAGRAM</span>
+                <span class="contact-value"><a href="https://www.instagram.com/kim.yunu" target="_blank">@KIM<span class="dot">.</span>YUNU</a></span>
+            </p>
+        </div>
+        <p class="main_text secondary-element" style="margin: 5px 0 0 0;">+</p>
+        <p class="secondary-element" style="margin: -3px 0 10px 0;">
+            <a href="https://archive.kimyunu.com" target="_blank" class="archive-link">Archive</a>
+        </p>
+        <p id="current-time" class="main_text secondary-element" style="margin: 0 0 5px 0;"></p>
+    </div>
 
     <script>
+        // Loading screen logic
         const dotsElement = document.getElementById('dots');
         let dotCount = 0;
-        dotsElement.textContent = ''; // Start with empty
+        dotsElement.textContent = ''; 
         
-        // Dot animation every 500ms (0.5s)
         const dotInterval = setInterval(() => {
-            dotCount = (dotCount + 1) % 4; // Cycles 0, 1, 2, 3
+            dotCount = (dotCount + 1) % 4;
             dotsElement.textContent = '.'.repeat(dotCount);
         }, 500);
 
-        // Redirect as soon as all resources (fonts, CSS) are fully loaded
         window.addEventListener('load', () => {
-            window.location.href = 'main.html';
+            clearInterval(dotInterval);
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('container').style.display = 'block';
+            updateTime();
+            setInterval(updateTime, 50);
         });
+
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+            const timeString = `${hours}:${minutes}:${seconds}.${milliseconds}`;
+            const timeElement = document.getElementById('current-time');
+            if (timeElement) timeElement.textContent = timeString;
+        }
+
+        const infoToggle = document.getElementById('info-toggle');
+        const contactDetails = document.getElementById('contact-details');
+        const indicator = document.getElementById('indicator');
+        const container = document.getElementById('container');
+
+        if (infoToggle) {
+            infoToggle.addEventListener('click', () => {
+                contactDetails.classList.toggle('hidden');
+                indicator.classList.toggle('rotated');
+                container.classList.toggle('info-active');
+                document.body.classList.toggle('info-active');
+            });
+        }
     </script>
 </body>
 </html>
